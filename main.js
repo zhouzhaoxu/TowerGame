@@ -140,8 +140,8 @@ Magician.prototype.update = function () {
     } else if(this.right) {
     	if(this.move) {
 	        this.xPosition += 15;
-	        if(this.xPosition >= 700) {
-	        	this.xPosition = 700;
+	        if(this.xPosition >= 750) {
+	        	this.xPosition = 750;
 	        }
 	        this.move = false;
         }
@@ -196,8 +196,32 @@ Magician.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
+//spell
+function Spell(game, spritesheet) {
+    this.animation = new Animation2(spritesheet, 9, 265, 63, 60, 8, 0.30, 8, true);
+    this.speed = 250;
+    this.ctx = game.ctx;
+    Entity.call(this, game, 0, 450);//position where it start
+}
+
+Spell.prototype = new Entity();
+Spell.prototype.constructor = Magician;
+
+Spell.prototype.update = function () {
+    this.x += this.game.clockTick * this.speed;
+    if (this.x > 800) this.x = -230;
+    Entity.prototype.update.call(this);
+}
+
+Spell.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
 AM.queueDownload("./img/magician.png");
 AM.queueDownload("./img/background.jpg");
+//AM.queueDownload("./img/fireball_0.png");
+AM.queueDownload("./img/instruction.jpg");
 
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
@@ -208,7 +232,9 @@ AM.downloadAll(function () {
     gameEngine.start();
     
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.jpg")));
+    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/instruction.jpg")));
     gameEngine.addEntity(new Magician(gameEngine, AM.getAsset("./img/magician.png")));
+    //gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
     
     console.log("All Done!");
 });
