@@ -1,0 +1,69 @@
+canvas {
+
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    style="border: 1px solid brown;
+    
+}
+
+
+@keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+}
+
+body { 
+
+width: 560px; 
+
+height: 400px; 
+
+background-image: url('img/movingbg.jpg');
+
+background-position: 0px 0px;
+
+background-repeat: repeat-x;
+
+
+
+animation: animatedBackground 40s linear infinite;
+
+}
+
+.endScreen {
+    position: absolute;
+        width: 800px; /*the image width*/
+        height: 400px; /*the image height*/
+        left: 50%;
+        top: 50%;
+        margin-left: -50px; /*half the image width*/
+        margin-top: -50px; /*half the image height*/
+   
+ }
+ 
+.boxed {
+  border: 1px solid green ;
+  width: 300px;
+  color: white;
+}
+
+#gameCanvas{
+    position:relative;
+    z-index:20;
+}
+
+div img {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+}
+
